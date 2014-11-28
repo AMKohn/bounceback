@@ -81,6 +81,7 @@
 		cookieLife: 365, // The cookie (when localStorage isn't available) expiry age, in days
 		scrollDelay: 500, // The amount of time in ms that bouncing should be ignored for after scrolling, or 0 to disable
 		aggressive: false, // Whether or not to ignore the cookie that blocks initialization unless it's the first pageview
+		checkReferrer: true, // Whether or not to check the referring page to see if it's on the same domain and this isn't the first pageview
 		storeName: "bounceback-visited", // The key to store the cookie (or localStorage item) under
 		onBounce: function() { return Bounceback; } // The default onBounce handler
 	};
@@ -339,6 +340,16 @@
 		}
 
 		this.options = options;
+
+		if (options.checkReferrer && doc.referrer) {
+			var a = doc.createElement("a");
+			
+			a.href = doc.referrer;
+
+			if (a.host !== root.location.host) {
+				this.data.set(options.storeName, "1");
+			}
+		}
 
 		if (!this.activated && (options.aggressive || !this.data.get(options.storeName))) {
 			this.activated = true;
