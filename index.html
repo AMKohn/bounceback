@@ -150,7 +150,7 @@ $ npm <span class="pl-s3">test</span></pre></div>
 <h3>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h3>
 
-<p><a href="LICENSE">MIT</a></p>
+<p><a href="https://github.com/AMKohn/bounceback/blob/master/LICENSE">MIT</a></p>
 
 <p>If you end up using Bounceback, shoot me a message, I'd love to see it in the wild!</p>
       </section>
@@ -164,6 +164,48 @@ $ npm <span class="pl-s3">test</span></pre></div>
     </div>
 
     
-    <script type="text/javascript" src="javascripts/main.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/AMKohn/bounceback/master/dist/bounceback.min.js"></script>
+    
+    <script type="text/javascript">
+      document.getElementById("demo").onclick = function(e) {
+        e.preventDefault();
+        
+        Bounceback.init({
+        	aggressive: true,
+          maxDisplay: Bounceback.options.maxDisplay + 1,
+        	onBounce: function() {
+        		var elm = document.createElement("div");
+        
+        		elm.innerHTML = "Click me";
+        
+        		elm.setAttribute("style", 
+        			"top: 0px;" +
+        			"left: 0px;" +
+        			"right: 0px;" +
+        			"bottom: 0px;" +
+        			"color: #FFF;" +
+        			"z-index: 9999;" +
+        			"position: fixed;" +
+        			"font-size: 150px;" +
+        			"font-weight: 700;" +
+        			"text-align: center;" +
+        			"background: rgba(0, 0, 0, .5);" +
+        			"font-family: Helvetica, Arial, sans-serif;" +
+        			"line-height: " + document.documentElement.clientHeight + "px;"
+        		);
+        
+        		elm.onclick = function() {
+        			elm.parentNode.removeChild(elm);
+
+        			elm = null;
+        		};
+        
+        		document.body.appendChild(elm);
+        	}
+        });
+        
+        return false;
+      };
+    </script>
   </body>
 </html>
