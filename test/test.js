@@ -64,7 +64,24 @@ var envs = {
 		document: {
 			addEventListener: function(evt, cb) {
 				emitter.on(evt, cb);
-			}
+			},
+
+			// This is only used to create an anchor so it ignores the element variable
+			createElement: function() {
+				var parsed = {};
+
+				return {
+					set href(val) {
+						parsed = url.parse(val);
+					},
+
+					get host() {
+						return parsed.host || "";
+					}
+				};
+			},
+
+			referrer: ""
 		},
 
 		title: "Page Title",
@@ -173,7 +190,24 @@ var envs = {
 
 			attachEvent: function(evt, cb) {
 				emitter.on(evt.substr(2), cb);
-			}
+			},
+
+			// This is only used to create an anchor so it ignores the element variable
+			createElement: function() {
+				var parsed = {};
+
+				return {
+					set href(val) {
+						parsed = url.parse(val);
+					},
+
+					get host() {
+						return parsed.host || "";
+					}
+				};
+			},
+
+			referrer: ""
 		},
 
 		onhashchange: null,
@@ -252,13 +286,27 @@ var core = function() {
 			Bounceback.activated.should.be.false;
 		});
 
-		it("should initialize correctly", function() {
+		it("should not initialize if the referrer is from the same domain", function() {
+			testEnv.document.referrer = "http://localhost/";
+
 			Bounceback.init({
 				maxDisplay: 2,
 				cookieLife: 1,
 				method: "auto",
 				storeName: "testStoreName"
+			}).activated.should.be.false;
+
+			testEnv.document.referrer = "";
+		});
+
+		it("should initialize even if the referrer is from the same domain when it's set to be aggressive", function() {
+			testEnv.document.referrer = "http://localhost/";
+
+			Bounceback.init({
+				aggressive: true
 			}).activated.should.be.true;
+
+			testEnv.document.referrer = "";
 		});
 
 		it("should have set a cookie in storage", function() {

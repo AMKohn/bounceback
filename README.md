@@ -83,6 +83,12 @@ This is necessary for the case when a user is scrolling and their mouse overshoo
 
 Because of this Bounceback waits a small amount of time after the last scroll event before re-enabling bounce detection.
 
+#### checkReferrer
+
+Default: `true`
+
+Whether or not to check the referring page to see if it's on the same domain and this isn't the first pageview.
+
 #### aggressive
 
 Default: `false`
