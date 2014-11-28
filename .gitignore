@@ -1,0 +1,5 @@
+lib-cov
+coverage
+.grunt
+node_modules
+Thumbs.db

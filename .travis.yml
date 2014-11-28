@@ -1,0 +1,12 @@
+language: node_js
+
+node_js:
+  - "0.10"
+
+branches:
+  except:
+    - "gh-pages"
+
+script: "npm run-script test-cov"
+
+after_script: "npm install coveralls@2.10.x && cat ./coverage/lcov.info | coveralls"
