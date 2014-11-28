@@ -1,4 +1,4 @@
-# Bounceback.js [![Build Status][travis-image]][travis-url] [![Test Coverage][coveralls-image]][coveralls-url] [![MIT License][license-image]][license-url] [![devDependency Status]([devdep-image])][devdep-url]
+# Bounceback.js [![Build Status][travis-image]][travis-url] [![Test Coverage][coveralls-image]][coveralls-url] [![MIT License][license-image]][license-url] [![devDependency Status][devdep-image]][devdep-url]
 
 ### Fast, dependency free exit intent detection
 
@@ -9,7 +9,7 @@ If you prefer a less hands-on product I'd be more than happy to accept the $4,00
 
 ## Features
 
- - Small size, Bounceback is only 1.2 KB
+ - Size: Bounceback is only 1.2 KB
  - 100% test coverage
  - Backwards compatible to IE6
  - Complete mobile support
@@ -53,9 +53,12 @@ Default: `auto`
 
 The bounce detection method.
 
-_Options:_
+*Options:*
+
    `auto`: Automatically picks a method based on the device type.  `mouse` is used for desktop browsers and `history` for mobile.
+
    `mouse`: This detects bounces based on the mouse's direction, velocity and distance from the top of the page.
+
    `history`: This method uses the HTML5 History APIs (or hashes when in an older browser) to duplicate the page in the history.  Then when the visitor clicks to go back Bounceback detects the navigation and shows the dialog.  This method is almost foolproof, but could annoy some users.  It works best for mobile browsers.
 
 #### sensitivity
@@ -108,7 +111,7 @@ $ npm install
 $ npm test
 ```
 
-  While Bounceback has been tested in actual browsers the tests create a stubbed environment that simulates modern, mobile, and older browsers for simplicity and speed.
+  While Bounceback has been tested in actual browsers the included tests create a stubbed environment that simulates modern, mobile, and older browsers for simplicity and speed.
 
 
 ### License
