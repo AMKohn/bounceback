@@ -134,6 +134,10 @@ var envs = {
 				href: "http://localhost/page?with=a-parameter#this-will-be-clobbered-if-using-the-mobile-ancient-browser-method"
 			},
 
+			get host() {
+				return this.parsed.host;
+			},
+
 			get hash() {
 				return this.parsed.hash;
 			},
