@@ -2,7 +2,7 @@
 
 [![Build Status][travis-image]][travis-url] [![Test Coverage][coveralls-image]][coveralls-url] [![MIT License][license-image]][license-url] [![devDependency Status][devdep-image]][devdep-url]
 
-### Fast, dependency free exit intent detection
+### Lightweight, dependency free, exit intent detection
 
 Bounceback provides a simple one-event system that allows you to detect just before a visitor bounces from your site.  It works in a fashion similar to the commercial products available, except of course it's open source and doesn't cost $4,000/month.
 
