@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Bounceback : Fast, dependency free exit intent detection">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Bounceback</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/AMKohn/bounceback">View on GitHub</a>
+
+          <h1 id="project_title">Bounceback</h1>
+          <h2 id="project_tagline">Fast, dependency free exit intent detection</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/AMKohn/bounceback/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/AMKohn/bounceback/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>Bounceback provides a simple one-event system that allows you to detect just before a visitor bounces from your site.  It works in a fashion similar to the commercial products available, except of course it's open source and doesn't cost $4,000/month.</p>
+
+<p>If you prefer a less hands-on product I'd be more than happy to accept the $4,000 and take care of everything for you.</p>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Size: Bounceback is only 1.2 KB</li>
+<li>100% test coverage</li>
+<li>Backwards compatible to IE6</li>
+<li>Complete mobile support</li>
+<li>No dependencies, shims or polyfills</li>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s1"><span class="pl-pds">"</span>bounceback.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<div class="highlight highlight-js"><pre>Bounceback.init([options])
+
+Bounceback.init({
+  <span class="pl-en">onBounce</span>: <span class="pl-st">function</span>() {
+    <span class="pl-c">// Your modal display or similar code goes here</span>
+  }
+})</pre></div>
+
+<h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options</h2>
+
+<h4>
+<a id="maxdisplay" class="anchor" href="#maxdisplay" aria-hidden="true"><span class="octicon octicon-link"></span></a>maxDisplay</h4>
+
+<p>Default: <code>1</code></p>
+
+<p>The maximum number of times the dialog may be shown on a page, or 0 for unlimited.  Only applicable on desktop browsers.</p>
+
+<h4>
+<a id="distance" class="anchor" href="#distance" aria-hidden="true"><span class="octicon octicon-link"></span></a>distance</h4>
+
+<p>Default: <code>100</code></p>
+
+<p>The minimum distance in pixels from the top of the page to consider triggering for.</p>
+
+<h4>
+<a id="method" class="anchor" href="#method" aria-hidden="true"><span class="octicon octicon-link"></span></a>method</h4>
+
+<p>Default: <code>auto</code></p>
+
+<p>The bounce detection method.</p>
+
+<p><em>Options:</em></p>
+
+<p><code>auto</code>: Automatically picks a method based on the device type.  <code>mouse</code> is used for desktop browsers and <code>history</code> for mobile.</p>
+
+<p><code>mouse</code>: This detects bounces based on the mouse's direction, velocity and distance from the top of the page.</p>
+
+<p><code>history</code>: This method uses the HTML5 History APIs (or hashes when in an older browser) to duplicate the page in the history.  Then when the visitor clicks to go back Bounceback detects the navigation and shows the dialog.  This method is almost foolproof, but could annoy some users.  It works best for mobile browsers.</p>
+
+<h4>
+<a id="sensitivity" class="anchor" href="#sensitivity" aria-hidden="true"><span class="octicon octicon-link"></span></a>sensitivity</h4>
+
+<p>Default: <code>10</code></p>
+
+<p>The minimum distance the mouse has to have moved in the last 10 mouse events for onBounce to be triggered.</p>
+
+<h4>
+<a id="cookielife" class="anchor" href="#cookielife" aria-hidden="true"><span class="octicon octicon-link"></span></a>cookieLife</h4>
+
+<p>Default: <code>365</code></p>
+
+<p>The cookie (when localStorage isn't available) expiry age, in days.</p>
+
+<h4>
+<a id="scrolldelay" class="anchor" href="#scrolldelay" aria-hidden="true"><span class="octicon octicon-link"></span></a>scrollDelay</h4>
+
+<p>Default: <code>500</code></p>
+
+<p>The amount of time in milliseconds that bounce events should be ignored for after scrolling, or 0 to disable.</p>
+
+<p>This is necessary for the case when a user is scrolling and their mouse overshoots the page.  As soon as scrolling stops a <code>mouseout</code> event is fired incorrectly triggering a bounce event.</p>
+
+<p>Because of this Bounceback waits a small amount of time after the last scroll event before re-enabling bounce detection.</p>
+
+<h4>
+<a id="aggressive" class="anchor" href="#aggressive" aria-hidden="true"><span class="octicon octicon-link"></span></a>aggressive</h4>
+
+<p>Default: <code>false</code></p>
+
+<p>This controls whether or not the bounce dialog should be shown on every page view or only on the user's first.</p>
+
+<h4>
+<a id="storename" class="anchor" href="#storename" aria-hidden="true"><span class="octicon octicon-link"></span></a>storeName</h4>
+
+<p>Default: <code>bounceback-visited</code></p>
+
+<p>The name/key to store the localStorage item (or cookie) under.</p>
+
+<h4>
+<a id="onbounce" class="anchor" href="#onbounce" aria-hidden="true"><span class="octicon octicon-link"></span></a>onBounce</h4>
+
+<p>Default: <code>function() { return Bounceback; }</code></p>
+
+<p>The handler to call when a bounce has been detected.  This accepts no arguments since none are necessary.</p>
+
+<h2>
+<a id="tests" class="anchor" href="#tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tests</h2>
+
+<p>To run the test suite, first install the dependencies, then run <code>npm test</code>:</p>
+
+<div class="highlight highlight-bash"><pre>$ npm install
+$ npm <span class="pl-s3">test</span></pre></div>
+
+<p>While Bounceback has been tested in actual browsers the included tests create a stubbed environment that simulates modern, mobile, and older browsers for simplicity and speed.</p>
+
+<h3>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h3>
+
+<p><a href="LICENSE">MIT</a></p>
+
+<p>If you end up using Bounceback, shoot me a message, I'd love to see it in the wild!</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Bounceback maintained by <a href="https://github.com/AMKohn">AMKohn</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
