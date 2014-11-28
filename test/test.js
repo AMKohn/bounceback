@@ -352,13 +352,14 @@ var desktop = function() {
 			called.should.equal(1);
 		});
 
-		it("should disable if triggered immediately after scrolling", function() {
+		it("should disable if triggered immediately after scrolling", function(done) {
 			var called = 0;
 
 			Bounceback.init({
 				onBounce: function() {
 					called++;
-				}
+				},
+				scrollDelay: 10
 			});
 
 			emitter.emit("scroll");
@@ -373,8 +374,14 @@ var desktop = function() {
 			called.should.equal(0);
 			Bounceback.disabled.should.be.true;
 
-			// If this isn't re-enabled later tests will fail because the trigger will still be blocked
-			Bounceback.disabled = false;
+			setTimeout(function() {
+				// If this isn't re-enabled later tests will fail because the trigger will still be blocked
+				if (Bounceback.disabled) {
+					Bounceback.disabled = false;
+				}
+
+				done();
+			}, 10);
 		});
 
 		it("should trigger up to the number of times specified in the options", function() {

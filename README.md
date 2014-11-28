@@ -1,4 +1,6 @@
-# Bounceback.js [![Build Status][travis-image]][travis-url] [![Test Coverage][coveralls-image]][coveralls-url] [![MIT License][license-image]][license-url] [![devDependency Status][devdep-image]][devdep-url]
+# Bounceback.js
+
+[![Build Status][travis-image]][travis-url] [![Test Coverage][coveralls-image]][coveralls-url] [![MIT License][license-image]][license-url] [![devDependency Status][devdep-image]][devdep-url]
 
 ### Fast, dependency free exit intent detection
 
