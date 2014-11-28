@@ -167,12 +167,13 @@ $ npm <span class="pl-s3">test</span></pre></div>
     <script type="text/javascript" src="https://rawgit.com/AMKohn/bounceback/master/dist/bounceback.min.js"></script>
     
     <script type="text/javascript">
+      var called = false;
+      
       document.getElementById("demo").onclick = function(e) {
         e.preventDefault();
         
         Bounceback.init({
         	aggressive: true,
-          maxDisplay: Bounceback.options.maxDisplay + 1,
         	onBounce: function() {
         		var elm = document.createElement("div");
         
@@ -185,6 +186,7 @@ $ npm <span class="pl-s3">test</span></pre></div>
         			"bottom: 0px;" +
         			"color: #FFF;" +
         			"z-index: 9999;" +
+        			"cursor: pointer;" +
         			"position: fixed;" +
         			"font-size: 150px;" +
         			"font-weight: 700;" +
@@ -203,6 +205,12 @@ $ npm <span class="pl-s3">test</span></pre></div>
         		document.body.appendChild(elm);
         	}
         });
+        
+        if (called) {
+          Bounceback.options.maxDisplay++;
+        }
+        
+        called = true;
         
         return false;
       };
