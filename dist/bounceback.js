@@ -346,7 +346,7 @@
 			
 			a.href = doc.referrer;
 
-			if (a.host !== root.location.host) {
+			if (a.host == root.location.host) {
 				this.data.set(options.storeName, "1");
 			}
 		}
